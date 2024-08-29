@@ -89,7 +89,7 @@
                             <ul class="collapse sidebar-submenu" id="masterDataSubmenu">
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='tahun_ajar'?'active':''?>" aria-expanded="false"
-                                        href="<?=base_url('masterdata/tahunAjaran')?>">
+                                        href="<?=base_url('masterdata/tahun_ajaran')?>">
                                         <span class="hide-menu">Tahun Ajar</span>
                                     </a>
                                 </li>
@@ -119,7 +119,7 @@
                                 </li>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='type_stok'?'active':''?>"
-                                        href="<?=base_url('masterdata/typeStok')?>">
+                                        href="<?=base_url('masterdata/type_stok')?>">
                                         <span class="hide-menu">Type Stok</span>
                                     </a>
                                 </li>

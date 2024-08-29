@@ -30,31 +30,36 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 0;?>
+                            <?php foreach ($allTahunAjar as $key => $tahunAjar):?>
                             <tr>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">1.</h6>
+                                    <h6 class="fw-semibold mb-0"><?=++$i;?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">20242</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$tahunAjar['kode_ta'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">2024-2025</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$tahunAjar['nama_ta'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">Lorem ipsum dolor sit amet consectetur adipisicing
-                                        elit. Deleniti, voluptatem...</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$tahunAjar['deskripsi'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#editTahunAjar" data-bs-toggle="modal"
-                                        data-kode_ta="20251" data-ta="2024-2025" data-deskripsi="2" data-id="1"
-                                        class="btn btn-primary btn-sm">
+                                        data-kode_ta="<?=$tahunAjar['kode_ta'];?>"
+                                        data-nama_ta="<?=$tahunAjar['nama_ta'];?>"
+                                        data-deskripsi="<?=$tahunAjar['deskripsi'];?>"
+                                        data-id="<?=$tahunAjar['id_ta'];?>" class="btn btn-primary btn-sm">
                                         Edit
                                     </button>
                                     <button type="button" data-bs-target="#hapusTahunAjar" data-bs-toggle="modal"
-                                        class="btn btn-danger btn-sm" data-id="1" data-ta="2024-2025">
+                                        class="btn btn-danger btn-sm" data-id_ta="<?=$tahunAjar['id_ta'];?>"
+                                        data-nama_ta="<?=$tahunAjar['nama_ta'];?>">
                                         Hapus</button>
                                 </td>
                             </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -70,20 +75,19 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post">
+            <form class="row g-3 needs-validation" action="<?=base_url('masterdata/add_ta');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
-                            <label for="kode_tahun_ajar" class="form-label">Kode Tahun Ajar</label>
-                            <input type="text" name="kode_tahun_ajar" class="form-control" id="kode_tahun_ajar"
-                                required>
+                            <label for="kode_ta" class="form-label">Kode Tahun Ajar</label>
+                            <input type="text" name="kode_ta" class="form-control" id="kode_ta" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="tahun_ajar" class="form-label">Tahun Ajar</label>
-                            <input type="text" name="tahun_ajar" class="form-control" id="tahun_ajar" required>
+                            <label for="nama_ta" class="form-label">Tahun Ajar</label>
+                            <input type="text" name="nama_ta" class="form-control" id="nama_ta" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -99,11 +103,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button class="btn btn-success btn-loading d-none" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                        <span role="status">Loading...</span>
-                    </button>
-                    <button type="submit" id="btn-simpan" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
@@ -116,28 +116,27 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post">
+            <form class="row g-3 needs-validation" action="<?=base_url('masterdata/update_ta');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
-                            <label for="kode_tahun_ajar" class="form-label">Kode Tahun Ajar</label>
-                            <input type="hidden" name="id_tahun_ajar" class="form-control" id="id_tahun_ajar" required>
-                            <input type="text" name="kode_tahun_ajar" class="form-control" id="kode_tahun_ajar"
-                                required>
+                            <label for="kode_ta" class="form-label">Kode Tahun Ajar</label>
+                            <input type="hidden" name="id_ta" class="form-control" id="id_ta" required>
+                            <input type="text" readonly name="kode_ta" class="form-control" id="kode_ta" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="tahun_ajar" class="form-label">Tahun Ajar</label>
-                            <input type="text" name="tahun_ajar" class="form-control" id="tahun_ajar" required>
+                            <label for="nama_ta" class="form-label">Tahun Ajar</label>
+                            <input type="text" name="nama_ta" class="form-control" id="nama_ta" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi</label>
-                            <textarea name="" class="form-control" id="deskripsi"></textarea>
+                            <textarea name="deskripsi" class="form-control" id="deskripsi"></textarea>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -146,11 +145,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button class="btn btn-success btn-loading d-none" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                        <span role="status">Loading...</span>
-                    </button>
-                    <button type="submit" id="btn-simpan" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
@@ -163,23 +158,19 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3" action="#" method="post">
+            <form class="row g-3" action="<?=base_url('masterdata/delete_ta');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
-                            <label for="id_tahun_ajar" class="form-label">Anda yakin ingin menghapus tahun ajar <strong
+                            <label for="id_ta" class="form-label">Anda yakin ingin menghapus tahun ajar <strong
                                     id="nama_ta"></strong> ?</label>
-                            <input type="hidden" id="id_tahun_ajar" name="id_tahun_ajar">
+                            <input type="hidden" id="id_ta" name="id_ta">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button class="btn btn-success btn-loading-hapus d-none" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                        <span role="status">Loading...</span>
-                    </button>
-                    <button type="submit" id="btn-hapus" class="btn btn-primary">Hapus</button>
+                    <button type="submit" class="btn btn-primary">Hapus</button>
                 </div>
             </form>
         </div>
@@ -192,14 +183,14 @@ editTahunAjar.addEventListener('show.bs.modal', function(event) {
     // Button that triggered the modal
     const button = event.relatedTarget;
     const kode_ta = button.getAttribute('data-kode_ta');
-    const ta = button.getAttribute('data-ta');
+    const ta = button.getAttribute('data-nama_ta');
     const deskripsi = button.getAttribute('data-deskripsi');
     const id_ta = button.getAttribute('data-id');
 
     // Update the modal's content
-    const modalIdTA = editTahunAjar.querySelector('#id_tahun_ajar');
-    const modalTa = editTahunAjar.querySelector('#tahun_ajar');
-    const modalKodeTA = editTahunAjar.querySelector('#kode_tahun_ajar');
+    const modalIdTA = editTahunAjar.querySelector('#id_ta');
+    const modalTa = editTahunAjar.querySelector('#nama_ta');
+    const modalKodeTA = editTahunAjar.querySelector('#kode_ta');
     const modalDeskripsi = editTahunAjar.querySelector('#deskripsi');
 
     modalIdTA.value = id_ta;
@@ -215,11 +206,11 @@ hapusTahunAjar.addEventListener('show.bs.modal', function(event) {
     // Button that triggered the modal
     const button = event.relatedTarget;
 
-    const id = button.getAttribute('data-id');
-    const nama_ta = button.getAttribute('data-ta');
+    const id = button.getAttribute('data-id_ta');
+    const nama_ta = button.getAttribute('data-nama_ta');
 
     // Update the modal's content
-    const modalIdTA = hapusTahunAjar.querySelector('#id_tahun_ajar');
+    const modalIdTA = hapusTahunAjar.querySelector('#id_ta');
     const modalNamaTA = hapusTahunAjar.querySelector('#nama_ta');
 
     modalIdTA.value = id;
