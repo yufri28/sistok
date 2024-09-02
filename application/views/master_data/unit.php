@@ -3,7 +3,7 @@
         <div class="card w-100 p-4">
             <div class="d-flex">
                 <h5 class="card-title fw-semibold mb-4">UNIT</h5>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#addSiswa" class="btn btn-primary ms-auto">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addUnit" class="btn btn-primary ms-auto">
                     Tambah Data
                 </button>
             </div>
@@ -27,27 +27,32 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 0;?>
+                            <?php foreach ($all_unit as $key => $unit):?>
                             <tr>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">1.</h6>
+                                    <h6 class="fw-semibold mb-0"><?=++$i;?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">5142677</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$unit['kode_unit'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">SMA</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$unit['nama_unit'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#editUnit" data-bs-toggle="modal"
-                                        data-kode_unit="20251" data-nama_unit="SMA" data-id="2"
+                                        data-kode_unit="<?=$unit['kode_unit'];?>"
+                                        data-nama_unit="<?=$unit['nama_unit'];?>" data-id_unit="<?=$unit['id_unit'];?>"
                                         class="btn btn-primary btn-sm">
                                         Edit
                                     </button>
                                     <button type="button" data-bs-target="#hapusUnit" data-bs-toggle="modal"
-                                        class="btn btn-danger btn-sm" data-nama_unit="SMA" data-id="2">
+                                        class="btn btn-danger btn-sm" data-nama_unit="<?=$unit['nama_unit'];?>"
+                                        data-id_unit="<?=$unit['id_unit'];?>">
                                         Hapus</button>
                                 </td>
                             </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -63,18 +68,20 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post">
+            <form class="row g-3 needs-validation" action="<?=base_url('masterdata/add_unit')?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
-                            <label for="kode_unit" class="form-label">Kode Unit</label>
+                            <label for="kode_unit" class="form-label">Kode Unit <small
+                                    class="text-danger">*</small></label>
                             <input type="text" name="kode_unit" class="form-control" id="kode_unit" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="nama_unit" class="form-label">Nama Unit</label>
+                            <label for="nama_unit" class="form-label">Nama Unit <small
+                                    class="text-danger">*</small></label>
                             <input type="text" name="nama_unit" class="form-control" id="nama_unit" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -101,19 +108,21 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post">
+            <form class="row g-3 needs-validation" action="<?=base_url('masterdata/update_unit')?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
-                            <label for="kode_unit" class="form-label">Kode Unit</label>
+                            <label for="kode_unit" class="form-label">Kode Unit <small
+                                    class="text-danger">*</small></label>
                             <input type="hidden" name="id_unit" class="form-control" id="id_unit" required>
-                            <input type="text" name="kode_unit" class="form-control" id="kode_unit" required>
+                            <input type="text" readonly name="kode_unit" class="form-control" id="kode_unit" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="nama_unit" class="form-label">Nama Unit</label>
+                            <label for="nama_unit" class="form-label">Nama Unit <small
+                                    class="text-danger">*</small></label>
                             <input type="text" name="nama_unit" class="form-control" id="nama_unit" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -140,7 +149,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3" action="#" method="post">
+            <form class="row g-3" action="<?=base_url('masterdata/delete_unit')?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">

@@ -43,7 +43,8 @@
                                     <h6 class="fw-semibold mb-1"><?=$tahunAjar['nama_ta'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1"><?=$tahunAjar['deskripsi'];?></h6>
+                                    <h6 class="fw-semibold mb-1">
+                                        <?=$tahunAjar['deskripsi'] == ''?'-':$tahunAjar['deskripsi'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#editTahunAjar" data-bs-toggle="modal"
@@ -79,14 +80,16 @@
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
-                            <label for="kode_ta" class="form-label">Kode Tahun Ajar</label>
+                            <label for="kode_ta" class="form-label">Kode Tahun Ajar <small
+                                    class="text-danger">*</small></label>
                             <input type="text" name="kode_ta" class="form-control" id="kode_ta" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="nama_ta" class="form-label">Tahun Ajar</label>
+                            <label for="nama_ta" class="form-label">Tahun Ajar <small
+                                    class="text-danger">*</small></label>
                             <input type="text" name="nama_ta" class="form-control" id="nama_ta" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -94,7 +97,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi</label>
-                            <textarea name="" class="form-control" id="deskripsi"></textarea>
+                            <textarea name="deskripsi" class="form-control" id="deskripsi"></textarea>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -120,7 +123,8 @@
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
-                            <label for="kode_ta" class="form-label">Kode Tahun Ajar</label>
+                            <label for="kode_ta" class="form-label">Kode Tahun Ajar <small
+                                    class="text-danger">*</small></label>
                             <input type="hidden" name="id_ta" class="form-control" id="id_ta" required>
                             <input type="text" readonly name="kode_ta" class="form-control" id="kode_ta" required>
                             <div class="valid-feedback">
@@ -128,7 +132,8 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="nama_ta" class="form-label">Tahun Ajar</label>
+                            <label for="nama_ta" class="form-label">Tahun Ajar <small
+                                    class="text-danger">*</small></label>
                             <input type="text" name="nama_ta" class="form-control" id="nama_ta" required>
                             <div class="valid-feedback">
                                 Looks good!

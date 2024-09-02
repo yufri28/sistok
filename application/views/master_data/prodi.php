@@ -28,28 +28,33 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 0;?>
+                            <?php foreach ($all_fakultas as $key => $fakultas):?>
                             <tr>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">1.</h6>
+                                    <h6 class="fw-semibold mb-0"><?=++$i;?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">5142677</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$fakultas['kode_fakultas'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">Fak. Kesehatan</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$fakultas['nama_fakultas'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#editFakultas" data-bs-toggle="modal"
-                                        data-kode_fak="5142677" data-nama_fak="Fak. Kesehatan" data-id="1"
-                                        class="btn btn-primary btn-sm">
+                                        data-kode_fak="<?=$fakultas['kode_fakultas'];?>"
+                                        data-nama_fak="<?=$fakultas['nama_fakultas'];?>"
+                                        data-id="<?=$fakultas['id_fakultas'];?>" class="btn btn-primary btn-sm">
                                         Edit
                                     </button>
                                     <button type="button" data-bs-target="#hapusFakultas" data-bs-toggle="modal"
-                                        class="btn btn-danger btn-sm" data-kode_fak="5142677"
-                                        data-nama_fak="Fak. Kesehatan" data-id="1">
+                                        class="btn btn-danger btn-sm" data-kode_fak="<?=$fakultas['kode_fakultas'];?>"
+                                        data-nama_fak="<?=$fakultas['nama_fakultas'];?>"
+                                        data-id="<?=$fakultas['id_fakultas'];?>">
                                         Hapus</button>
                                 </td>
                             </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -89,31 +94,36 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $j = 0;?>
+                            <?php foreach ($all_prodi as $key => $prodi):?>
                             <tr>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">1.</h6>
+                                    <h6 class="fw-semibold mb-0"><?=++$j;?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">5142677</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$prodi['kode_prodi'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">S1 - Kebidanan</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$prodi['nama_prodi'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">Kesehatan</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$prodi['nama_fakultas'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#editProdi" data-bs-toggle="modal"
-                                        data-kode_prodi="5142677" data-id_fak="1" data-nama_prodi="S1 - Kebidanan"
-                                        data-id_prodi="1" class="btn btn-primary btn-sm">
+                                        data-kode_prodi="<?=$prodi['kode_prodi'];?>"
+                                        data-id_fak="<?=$prodi['id_fakultas'];?>"
+                                        data-nama_prodi="<?=$prodi['nama_prodi'];?>"
+                                        data-id_prodi="<?=$prodi['id_prodi'];?>" class="btn btn-primary btn-sm">
                                         Edit
                                     </button>
                                     <button type="button" data-bs-target="#hapusProdi" data-bs-toggle="modal"
-                                        class="btn btn-danger btn-sm" data-kode_prodi="5142677" data-id_fak="1"
-                                        data-nama_prodi="S1 - Kebidanan" data-id_prodi="1">
+                                        class="btn btn-danger btn-sm" data-nama_prodi="<?=$prodi['nama_prodi'];?>"
+                                        data-id_prodi="<?=$prodi['id_prodi'];?>">
                                         Hapus</button>
                                 </td>
                             </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -129,7 +139,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" method="post" action="#">
+            <form class="row g-3 needs-validation" method="post" action="<?=base_url('masterdata/add_fakultas');?>">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
@@ -163,13 +173,14 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post">
+            <form class="row g-3 needs-validation" action="<?=base_url('masterdata/update_fakultas');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
                             <label for="kode_fakultas" class="form-label">Kode Fakultas</label>
                             <input type="hidden" name="id_fakultas" class="form-control" id="id_fakultas" required>
-                            <input type="text" name="kode_fakultas" class="form-control" id="kode_fakultas" required>
+                            <input type="text" readonly name="kode_fakultas" class="form-control" id="kode_fakultas"
+                                required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -198,13 +209,13 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3" action="#" method="post">
+            <form class="row g-3" action="<?=base_url('masterdata/delete_fakultas');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
-                            <label for="id_fak" class="form-label">Anda yakin ingin menghapus fakultas <strong
-                                    id="nama_fak"></strong> ?</label>
-                            <input type="hidden" id="id_fak" name="id_fak">
+                            <label for="id_fakultas" class="form-label">Anda yakin ingin menghapus fakultas <strong
+                                    id="nama_fakultas"></strong> ?</label>
+                            <input type="hidden" id="id_fakultas" name="id_fakultas">
                         </div>
                     </div>
                 </div>
@@ -223,7 +234,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" method="post" action="#">
+            <form class="row g-3 needs-validation" method="post" action="<?=base_url('masterdata/add_prodi');?>">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
@@ -241,11 +252,12 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="nama_fakultas" class="form-label">Nama Fakultas</label>
-                            <select class="form-select" name="nama_fakultas" id="nama_fakultas" required>
+                            <label for="fk_fakultas" class="form-label">Nama Fakultas</label>
+                            <select class="form-select" name="fk_fakultas" id="fk_fakultas" required>
                                 <option value="">Choose...</option>
-                                <option value="1">Fak. Kesehatan</option>
-                                <option value="2">Fak. Teknik</option>
+                                <?php foreach ($all_fakultas as $key => $fakultas):?>
+                                <option value="<?=$fakultas['id_fakultas'];?>"><?=$fakultas['nama_fakultas'];?></option>
+                                <?php endforeach;?>
                             </select>
                             <div class="invalid-feedback">
                                 Please select a valid state.
@@ -268,12 +280,13 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post">
+            <form class="row g-3 needs-validation" action="<?=base_url('masterdata/update_prodi');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
                             <label for="kode_prodi" class="form-label">Kode Prodi</label>
-                            <input type="text" name="kode_prodi" class="form-control" id="kode_prodi" required>
+                            <input type="hidden" name="id_prodi" class="form-control" id="id_prodi" required>
+                            <input type="text" readonly name="kode_prodi" class="form-control" id="kode_prodi" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -287,10 +300,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="id_fak" class="form-label">Nama Fakultas</label>
-                            <select class="form-select" name="id_fak" id="id_fak" required>
+                            <select class="form-select" name="fk_fakultas" id="id_fak" required>
                                 <option value="">Choose...</option>
-                                <option value="1">Fak. Kesehatan</option>
-                                <option value="2">Fak. Teknik</option>
+                                <?php foreach ($all_fakultas as $key => $fakultas):?>
+                                <option value="<?=$fakultas['id_fakultas'];?>"><?=$fakultas['nama_fakultas'];?></option>
+                                <?php endforeach;?>
                             </select>
                             <div class="invalid-feedback">
                                 Please select a valid state.
@@ -300,7 +314,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button type="submit" id="btn-simpan" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
@@ -313,7 +327,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3" name="hapus-form">
+            <form class="row g-3" action="<?=base_url('masterdata/delete_prodi');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
@@ -361,8 +375,8 @@ hapusFakultas.addEventListener('show.bs.modal', function(event) {
     const nama_fak = button.getAttribute('data-nama_fak');
     const id = button.getAttribute('data-id');
 
-    const modalId = hapusFakultas.querySelector('#id_fak');
-    const modalNamaFak = hapusFakultas.querySelector('#nama_fak');
+    const modalId = hapusFakultas.querySelector('#id_fakultas');
+    const modalNamaFak = hapusFakultas.querySelector('#nama_fakultas');
 
     modalId.value = id;
     modalNamaFak.textContent = nama_fak;
@@ -378,7 +392,7 @@ editProdi.addEventListener('show.bs.modal', function(event) {
     const kode_prodi = button.getAttribute('data-kode_prodi');
     const nama_prodi = button.getAttribute('data-nama_prodi');
     const id_fak = button.getAttribute('data-id_fak');
-    const id = button.getAttribute('data-id');
+    const id = button.getAttribute('data-id_prodi');
 
     // Update the modal's content
     const modalKodeProdi = editProdi.querySelector('#kode_prodi');
@@ -393,7 +407,6 @@ editProdi.addEventListener('show.bs.modal', function(event) {
 });
 
 
-
 // ============== Hapus =======================
 const hapusProdi = document.getElementById('hapusProdi');
 hapusProdi.addEventListener('show.bs.modal', function(event) {
@@ -401,7 +414,7 @@ hapusProdi.addEventListener('show.bs.modal', function(event) {
     const button = event.relatedTarget;
 
     const nama_prodi = button.getAttribute('data-nama_prodi');
-    const id = button.getAttribute('data-id');
+    const id = button.getAttribute('data-id_prodi');
 
     const modalId = hapusProdi.querySelector('#id_prodi');
     const modalNamaProdi = hapusProdi.querySelector('#nama_prodi');

@@ -26,37 +26,48 @@
                                     <h6 class="fw-semibold mb-0">Jenis Kelamin</h6>
                                 </th>
                                 <th class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-0">Prodi</h6>
+                                </th>
+                                <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Aksi</h6>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 0;?>
+                            <?php foreach ($all_mahasiswa as $key => $mahasiswa):?>
                             <tr>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">1.</h6>
+                                    <h6 class="fw-semibold mb-0"><?=++$i;?>.</h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">5142677</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$mahasiswa['nim'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">Andrew McDownland</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$mahasiswa['nama_mahasiswa'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">Laki-laki</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$mahasiswa['jenis_kelamin'];?></h6>
+                                </td>
+                                <td class="border-bottom-0">
+                                    <h6 class="fw-semibold mb-1"><?=$mahasiswa['nama_prodi'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#editMahasiswa" data-bs-toggle="modal"
-                                        data-nim="5142677" data-jenis_kelamin="Laki-laki"
-                                        data-nama_mahasiswa="Andrew McDownland" data-id="1"
-                                        class="btn btn-primary btn-sm">
+                                        data-nim="<?=$mahasiswa['nim'];?>"
+                                        data-jenis_kelamin="<?=$mahasiswa['jenis_kelamin'];?>"
+                                        data-nama_mahasiswa="<?=$mahasiswa['nama_mahasiswa'];?>"
+                                        data-id="<?=$mahasiswa['id_mahasiswa'];?>"
+                                        data-fk_prodi="<?=$mahasiswa['fk_prodi'];?>" class="btn btn-primary btn-sm">
                                         Edit
                                     </button>
                                     <button type="button" data-bs-target="#hapusMahasiswa" data-bs-toggle="modal"
-                                        class="btn btn-danger btn-sm" data-id="1"
-                                        data-nama_mahasiswa="Andrew McDownland">
+                                        class="btn btn-danger btn-sm" data-id="<?=$mahasiswa['id_mahasiswa'];?>"
+                                        data-nama_mahasiswa="<?=$mahasiswa['nama_mahasiswa'];?>">
                                         Hapus</button>
                                 </td>
                             </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -72,7 +83,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post">
+            <form class="row g-3 needs-validation" action="<?=base_url('masterdata/add_mahasiswa')?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
@@ -95,6 +106,18 @@
                                 <option value="">Choose...</option>
                                 <option value="Laki-laki">Laki-laki</option>
                                 <option value="Perempuan">Perempuan</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid state.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fk_prodi" class="form-label">Prodi</label>
+                            <select class="form-select" name="fk_prodi" id="fk_prodi" required>
+                                <option value="">Choose...</option>
+                                <?php foreach ($all_prodi as $key => $prodi):?>
+                                <option value="<?=$prodi['id_prodi']?>"><?=$prodi['nama_prodi']?></option>
+                                <?php endforeach;?>
                             </select>
                             <div class="invalid-feedback">
                                 Please select a valid state.
@@ -121,13 +144,13 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post">
+            <form class="row g-3 needs-validation" action="<?=base_url('masterdata/update_mahasiswa')?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
                             <label for="nim" class="form-label">NIM</label>
-                            <input type="text" name="nim" class="form-control" id="nim" required>
-                            <input type="hidden" name="id" class="form-control" id="id" required>
+                            <input type="text" readonly name="nim" class="form-control" id="nim" required>
+                            <input type="hidden" name="id_mahasiswa" class="form-control" id="id" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -150,15 +173,23 @@
                                 Please select a valid state.
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label for="fk_prodi" class="form-label">Prodi</label>
+                            <select class="form-select" name="fk_prodi" id="fk_prodi" required>
+                                <option value="">Choose...</option>
+                                <?php foreach ($all_prodi as $key => $prodi):?>
+                                <option value="<?=$prodi['id_prodi']?>"><?=$prodi['nama_prodi']?></option>
+                                <?php endforeach;?>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid state.
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button class="btn btn-success btn-loading d-none" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                        <span role="status">Loading...</span>
-                    </button>
-                    <button type="submit" id="btn-simpan" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
@@ -171,23 +202,19 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3" name="hapus-form">
+            <form class="row g-3" action="<?=base_url('masterdata/delete_mahasiswa')?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
                             <label for="id" class="form-label">Anda yakin ingin menghapus <strong
                                     id="nama_mahasiswa"></strong> ?</label>
-                            <input type="hidden" id="id" name="id">
+                            <input type="hidden" id="id" name="id_mahasiswa">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button class="btn btn-success btn-loading-hapus d-none" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                        <span role="status">Loading...</span>
-                    </button>
-                    <button type="submit" id="btn-hapus" class="btn btn-primary">Hapus</button>
+                    <button type="submit" class="btn btn-primary">Hapus</button>
                 </div>
             </form>
         </div>
@@ -201,17 +228,20 @@ editMahasiswa.addEventListener('show.bs.modal', function(event) {
     const button = event.relatedTarget;
 
     const id = button.getAttribute('data-id');
+    const fk_prodi = button.getAttribute('data-fk_prodi');
     const nim = button.getAttribute('data-nim');
     const nama_mahasiswa = button.getAttribute('data-nama_mahasiswa');
     const jenis_kelamin = button.getAttribute('data-jenis_kelamin');
 
     // Update the modal's content
     const modalId = editMahasiswa.querySelector('#id');
+    const modalFkProdi = editMahasiswa.querySelector('#fk_prodi');
     const modalNim = editMahasiswa.querySelector('#nim');
     const modalNama = editMahasiswa.querySelector('#nama_mahasiswa');
     const modalJenisKelamin = editMahasiswa.querySelector('#jenis_kelamin');
 
     modalId.value = id;
+    modalFkProdi.value = fk_prodi;
     modalNim.value = nim;
     modalNama.value = nama_mahasiswa;
     modalJenisKelamin.value = jenis_kelamin;

@@ -25,23 +25,28 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 0;?>
+                            <?php foreach ($all_ukuran as $key => $ukuran):?>
                             <tr>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">1.</h6>
+                                    <h6 class="fw-semibold mb-0"><?=++$i;?>.</h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">S</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$ukuran['nama_ukuran'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#editUkuran" data-bs-toggle="modal"
-                                        data-ukuran="S" data-id_ukuran="1" class="btn btn-primary btn-sm">
+                                        data-ukuran="<?=$ukuran['nama_ukuran'];?>"
+                                        data-id_ukuran="<?=$ukuran['id_ukuran'];?>" class="btn btn-primary btn-sm">
                                         Edit
                                     </button>
                                     <button type="button" data-bs-target="#hapusUkuran" data-bs-toggle="modal"
-                                        class="btn btn-danger btn-sm" data-ukuran="S" data-id_ukuran="1">
+                                        class="btn btn-danger btn-sm" data-ukuran="<?=$ukuran['nama_ukuran'];?>"
+                                        data-id_ukuran="<?=$ukuran['id_ukuran'];?>">
                                         Hapus</button>
                                 </td>
                             </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -57,7 +62,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post">
+            <form class="row g-3 needs-validation" action="<?=base_url('masterdata/add_ukuran');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
@@ -71,11 +76,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button class="btn btn-success btn-loading d-none" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                        <span role="status">Loading...</span>
-                    </button>
-                    <button type="submit" id="btn-simpan" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
@@ -88,12 +89,12 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="#" method="post">
+            <form class="row g-3 needs-validation" action="<?=base_url('masterdata/update_ukuran');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
                             <label for="ukuran" class="form-label">Nama Ukuran</label>
-                            <input type="text" name="ukuran" class="form-control" id="ukuran" required>
+                            <input type="text" name="nama_ukuran" class="form-control" id="nama_ukuran" required>
                             <input type="hidden" name="id_ukuran" class="form-control" id="id_ukuran" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -103,11 +104,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button class="btn btn-success btn-loading d-none" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                        <span role="status">Loading...</span>
-                    </button>
-                    <button type="submit" id="btn-simpan" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
@@ -120,7 +117,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3" name="hapus-form">
+            <form class="row g-3" action="<?=base_url('masterdata/delete_ukuran');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
@@ -132,11 +129,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button class="btn btn-success btn-loading-hapus d-none" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                        <span role="status">Loading...</span>
-                    </button>
-                    <button type="submit" id="btn-hapus" class="btn btn-primary">Hapus</button>
+                    <button type="submit" class="btn btn-primary">Hapus</button>
                 </div>
             </form>
         </div>
@@ -154,7 +147,7 @@ editUkuran.addEventListener('show.bs.modal', function(event) {
 
     // Update the modal's content
     const modalIdUkuran = editUkuran.querySelector('#id_ukuran');
-    const modalUkuran = editUkuran.querySelector('#ukuran');
+    const modalUkuran = editUkuran.querySelector('#nama_ukuran');
 
     modalIdUkuran.value = id_ukuran;
     modalUkuran.value = ukuran;
