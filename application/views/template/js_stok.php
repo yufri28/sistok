@@ -11,10 +11,10 @@ $(document).ready(function() {
         var filterValue = $(this).val();
         if (filterValue) {
             // Filter berdasarkan kolom "Jenis Barang"
-            table.column(3).search(filterValue).draw(); // Kolom ke-11 adalah "Jenis Barang"
+            table.column(2).search(filterValue).draw(); // Kolom ke-11 adalah "Jenis Barang"
         } else {
             // Jika tidak ada filter yang dipilih, tampilkan semua data
-            table.column(3).search('').draw();
+            table.column(2).search('').draw();
         }
     });
 });

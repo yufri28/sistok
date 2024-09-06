@@ -7,16 +7,10 @@
                     <label for="filter-unit" class="me-2 text-nowrap">Unit:</label>
                     <select id="filter-unit" class="form-select">
                         <option value="">Choose...</option>
-                        <option value="SDK Citra Bangsa">SDK Citra Bangsa</option>
-                        <option value="SMPK Citra Bangsa">SMPK Citra Bangsa
-                        </option>
-                        <option value="SMAK Citra Bangsa">SMAK Citra Bangsa</option>
+                        <?php foreach ($all_unit as $key => $unit):?>
+                        <option value="<?=$unit['id_unit'];?>"><?=$unit['nama_unit'];?></option>
+                        <?php endforeach;?>
                     </select>
-                </div>
-                <div class="d-flex justify-content-center ms-lg-2">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#addSiswa" class="btn btn-primary">
-                        Tambah Data
-                    </button>
                 </div>
             </div>
             <div class="card-body p-4">
@@ -45,34 +39,34 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 0;?>
+                            <?php foreach ($all_siswa as $key => $siswa):?>
                             <tr>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">1.</h6>
+                                    <h6 class="fw-semibold mb-0"><?=++$i;?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">Seragam Olahraga</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$siswa['nama_typestok'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">SDK Citra Bangsa</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$siswa['nama_unit'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1">L</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$siswa['nama_ukuran'];?></h6>
                                 </td>
                                 <td class="border-bottom-0 text-center">
-                                    <h6 class="fw-semibold mb-1">70</h6>
+                                    <h6 class="fw-semibold mb-1"><?=$siswa['jumlah_stok'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <button type="button" data-bs-target="#editMahasiswa" data-bs-toggle="modal"
-                                        data-ta="20251" data-semester="Semester 1" data-kelas="2" data-nis="5142677"
-                                        data-nama_mahasiswa="Andrew McDownland" data-typestok="Seragam Yayasan"
-                                        data-ukuran="L" data-id="42" class="btn btn-primary btn-sm">
-                                        Edit
-                                    </button>
-                                    <button type="button" data-bs-target="#hapusMahasiswa" data-bs-toggle="modal"
-                                        class="btn btn-danger btn-sm" data-id_data="1">
+                                    <button type="button" data-bs-target="#hapusStok" data-bs-toggle="modal"
+                                        class="btn btn-danger btn-sm" data-id_stok="<?=$siswa['id_stok_siswa'];?>"
+                                        data-nama_typestok="<?=$siswa['nama_typestok'];?>"
+                                        data-nama_unit="<?=$siswa['nama_unit'];?>"
+                                        data-nama_ukuran="<?=$siswa['nama_ukuran'];?>">
                                         Hapus</button>
                                 </td>
                             </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -81,7 +75,7 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="addSiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addMahasiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -163,165 +157,50 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="editSiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form class="row g-3 needs-validation" name="kmf-contact-form" novalidate>
-                <div class="modal-body">
-                    <div class="p-3">
-                        <div class="mb-3">
-                            <label for="tahun_ajar" class="form-label">Tahun Ajar</label>
-                            <input type="hidden" name="id_data" class="form-control" id="id_data" required>
-                            <input type="text" name="tahun_ajar" class="form-control" id="tahun_ajar" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="semester" class="form-label">Semester</label>
-                            <select class="form-select" name="semester" id="semester" required>
-                                <option value="">Choose...</option>
-                                <option value="Semester 1">Semester 1</option>
-                                <option value="Semester 2">Semester 2</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nis" class="form-label">NIS</label>
-                            <input type="text" name="nis" class="form-control" id="nis" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nama_siswa" class="form-label">Nama</label>
-                            <input type="text" name="nama_siswa" class="form-control" id="nama_siswa" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="kelas" class="form-label">Kelas</label>
-                            <input type="text" name="kelas" class="form-control" id="kelas" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="type_stok" class="form-label">Type Stok</label>
-                            <select class="form-select" name="type_stok" id="type_stok" required>
-                                <option value="">Choose...</option>
-                                <option value="Seragam Yayasan">Seragam Yayasan</option>
-                                <option value="Seragam Merah Putih">Seragam Merah Putih</option>
-                                <option value="Olahraga">Olahraga</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="ukuran" class="form-label">Ukuran</label>
-                            <input type="text" name="ukuran" class="form-control" id="ukuran" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button class="btn btn-success btn-loading d-none" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                        <span role="status">Loading...</span>
-                    </button>
-                    <button type="submit" id="btn-simpan" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="hapusSiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="hapusStok" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3" name="hapus-form">
+            <form class="row g-3" action="<?=base_url('stok/delete_stok_mahasiswa');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
-                            <label for="id_data" class="form-label">Anda yakin ingin menghapus ?</label>
-                            <input type="hidden" id="id_data" name="id_data">
+                            <label for="id_stok" class="form-label">Anda yakin ingin menghapus<strong
+                                    id="content"></strong> ?</label>
+                            <input type="hidden" id="id_stok" name="id_stok">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button class="btn btn-success btn-loading-hapus d-none" type="button" disabled>
-                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-                        <span role="status">Loading...</span>
-                    </button>
-                    <button type="submit" id="btn-hapus" class="btn btn-primary">Hapus</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Hapus</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 <script>
-// ================== Edit ========================
-const editSiswa = document.getElementById('editSiswa');
-editSiswa.addEventListener('show.bs.modal', function(event) {
-    // Button that triggered the modal
-    const button = event.relatedTarget;
-
-    const id = button.getAttribute('data-id');
-    const ta = button.getAttribute('data-ta');
-    const semester = button.getAttribute('data-semester');
-    const kelas = button.getAttribute('data-kelas');
-    const nis = button.getAttribute('data-nis');
-    const typestok = button.getAttribute('data-typestok');
-    const ukuran = button.getAttribute('data-ukuran');
-    const nama_siswa = button.getAttribute('data-nama_siswa');
-
-    // Update the modal's content
-    const modalIdData = editSiswa.querySelector('#id_data');
-    const modalTa = editSiswa.querySelector('#tahun_ajar');
-    const modalSemester = editSiswa.querySelector('#semester');
-    const modalKelas = editSiswa.querySelector('#kelas');
-    const modalNis = editSiswa.querySelector('#nis');
-    const modalTypestok = editSiswa.querySelector('#type_stok');
-    const modalUkuran = editSiswa.querySelector('#ukuran');
-    const modalNamaSiswa = editSiswa.querySelector('#nama_siswa');
-
-    modalIdData.value = id;
-    modalTa.value = ta;
-    modalSemester.value = semester;
-    modalKelas.value = kelas;
-    modalNis.value = nis;
-    modalTypestok.value = typestok;
-    modalUkuran.value = ukuran;
-    modalNamaSiswa.value = nama_siswa;
-});
-
-
 // ============== Hapus =======================
-const hapusSiswa = document.getElementById('hapusSiswa');
-hapusSiswa.addEventListener('show.bs.modal', function(event) {
+const hapusStok = document.getElementById('hapusStok');
+hapusStok.addEventListener('show.bs.modal', function(event) {
     // Button that triggered the modal
     const button = event.relatedTarget;
 
-    const id_data = button.getAttribute('data-id_data');
+    const id_stok = button.getAttribute('data-id_stok');
+    const nama_typestok = button.getAttribute('data-nama_typestok');
+    const nama_unit = button.getAttribute('data-nama_unit');
+    const nama_ukuran = button.getAttribute('data-nama_ukuran');
 
     // Update the modal's content
-    const modalIdData = hapusSiswa.querySelector('#id_data');
+    const modalIdData = hapusStok.querySelector('#id_stok');
+    const modalKonten = hapusStok.querySelector('#content');
 
-    modalIdData.value = id_data;
+    modalIdData.value = id_stok;
+    modalKonten.textContent =
+        ` Stok ${nama_typestok} ukuran ${nama_ukuran} untuk unit ${nama_unit}`;
 });
 </script>
