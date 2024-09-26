@@ -33,9 +33,11 @@
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Jumlah Tersedia</h6>
                                 </th>
+                                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_m' && $this->session->userdata('role') != 'user'):?>
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Aksi</h6>
                                 </th>
+                                <?php endif;?>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,6 +59,7 @@
                                 <td class="border-bottom-0 text-center">
                                     <h6 class="fw-semibold mb-1"><?=$siswa['jumlah_stok'];?></h6>
                                 </td>
+                                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_m' && $this->session->userdata('role') != 'user'):?>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#hapusStok" data-bs-toggle="modal"
                                         class="btn btn-danger btn-sm" data-id_stok="<?=$siswa['id_stok_siswa'];?>"
@@ -65,6 +68,7 @@
                                         data-nama_ukuran="<?=$siswa['nama_ukuran'];?>">
                                         Hapus</button>
                                 </td>
+                                <?php endif;?>
                             </tr>
                             <?php endforeach;?>
                         </tbody>

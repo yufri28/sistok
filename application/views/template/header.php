@@ -12,6 +12,10 @@
     <!-- begin::Sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- end::Sweetalert -->
+
+    <!-- begin::Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- end::Select2 -->
 </head>
 
 <body>
@@ -61,18 +65,22 @@
                             </a>
                             <!-- Sub-menu -->
                             <ul class="collapse sidebar-submenu" id="stokDataSubmenu">
+                                <?php if($this->session->userdata('role') != "admin_s"):?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='stok-mahasiswa'?'active':''?>"
                                         aria-expanded="false" href="<?=base_url('stok/mahasiswa')?>">
                                         <span class="hide-menu">Mahasiswa</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
+                                <?php if($this->session->userdata('role') != 'admin_m'):?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='stok-siswa'?'active':''?>"
                                         href="<?=base_url('stok/siswa')?>">
                                         <span class="hide-menu">Siswa</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -93,30 +101,38 @@
                                         <span class="hide-menu">Tahun Ajar</span>
                                     </a>
                                 </li>
+                                <?php if($this->session->userdata('role') != "admin_m"):?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='unit'?'active':''?>"
                                         href="<?=base_url('masterdata/unit')?>">
                                         <span class="hide-menu">Unit</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
+                                <?php if($this->session->userdata('role') != "admin_s"):?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='prodi'?'active':''?>"
                                         href="<?=base_url('masterdata/prodi')?>">
                                         <span class="hide-menu">Prodi</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
+                                <?php if($this->session->userdata('role') != "admin_s"):?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='mahasiswa'?'active':''?>"
                                         href="<?=base_url('masterdata/mahasiswa')?>">
                                         <span class="hide-menu">Mahasiswa</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
+                                <?php if($this->session->userdata('role') != "admin_m"):?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='siswa'?'active':''?>"
                                         href="<?=base_url('masterdata/siswa')?>">
                                         <span class="hide-menu">Siswa</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='type_stok'?'active':''?>"
                                         href="<?=base_url('masterdata/type_stok')?>">
@@ -132,7 +148,7 @@
                             </ul>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link d-flex justify-content-between align-items-center <?=$menu=='pengambilan_sd' || $menu=='pengambilan_smp' || $menu=='pengambilan_sma' || $menu=='pengambilan_ucb'?'active':''?>"
+                            <a class="sidebar-link d-flex justify-content-between align-items-center <?=$menu=='pengambilan_siswa' || $menu=='pengambilan_mahasiswa'?'active':''?>"
                                 data-bs-toggle="collapse" href="#pengambilanDataSubmenu" role="button"
                                 aria-expanded="false" aria-controls="pengambilanDataSubmenu" onclick="toggleIcon(this)">
                                 <span>
@@ -143,30 +159,22 @@
                             </a>
                             <!-- Sub-menu -->
                             <ul class="collapse sidebar-submenu" id="pengambilanDataSubmenu">
+                                <?php if($this->session->userdata('role') != "admin_s"):?>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link <?=$menu=='pengambilan_sd'?'active':''?>"
-                                        aria-expanded="false" href="<?=base_url('pengambilan/sd')?>">
-                                        <span class="hide-menu">SD</span>
+                                    <a class="sidebar-link <?=$menu=='pengambilan_mahasiswa'?'active':''?>"
+                                        href="<?=base_url('pengambilan/mahasiswa')?>">
+                                        <span class="hide-menu">Mahasiswa</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
+                                <?php if($this->session->userdata('role') != "admin_m"):?>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link <?=$menu=='pengambilan_smp'?'active':''?>"
-                                        href="<?=base_url('pengambilan/smp')?>">
-                                        <span class="hide-menu">SMP</span>
+                                    <a class="sidebar-link <?=$menu=='pengambilan_siswa'?'active':''?>"
+                                        aria-expanded="false" href="<?=base_url('pengambilan/siswa')?>">
+                                        <span class="hide-menu">Siswa</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link <?=$menu=='pengambilan_sma'?'active':''?>"
-                                        href="<?=base_url('pengambilan/sma')?>">
-                                        <span class="hide-menu">SMA</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link <?=$menu=='pengambilan_ucb'?'active':''?>"
-                                        href="<?=base_url('pengambilan/ucb')?>">
-                                        <span class="hide-menu">UCB</span>
-                                    </a>
-                                </li>
+                                <?php endif;?>
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -181,18 +189,22 @@
                             </a>
                             <!-- Sub-menu -->
                             <ul class="collapse sidebar-submenu" id="permintaanDataSubmenu">
+                                <?php if($this->session->userdata('role') != "admin_s"):?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='per-mahasiswa'?'active':''?>"
                                         aria-expanded="false" href="<?=base_url('permintaan/mahasiswa')?>">
                                         <span class="hide-menu">Mahasiswa</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
+                                <?php if($this->session->userdata('role') != "admin_m"):?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='per-siswa'?'active':''?>"
                                         href="<?=base_url('permintaan/siswa')?>">
                                         <span class="hide-menu">Siswa</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -207,18 +219,22 @@
                             </a>
                             <!-- Sub-menu -->
                             <ul class="collapse sidebar-submenu" id="pemesananDataSubmenu">
+                                <?php if($this->session->userdata('role') != "admin_s"):?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='pem-mahasiswa'?'active':''?>"
                                         aria-expanded="false" href="<?=base_url('pemesanan/mahasiswa')?>">
                                         <span class="hide-menu">Mahasiswa</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
+                                <?php if($this->session->userdata('role') != "admin_m"):?>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link <?=$menu=='pem-siswa'?'active':''?>"
                                         href="<?=base_url('pemesanan/siswa')?>">
                                         <span class="hide-menu">Siswa</span>
                                     </a>
                                 </li>
+                                <?php endif;?>
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -230,6 +246,7 @@
                                 <span class="hide-menu">Laporan</span>
                             </a>
                         </li>
+                        <?php if($this->session->userdata('role') == 'administrator' || $this->session->userdata('role') == 'admin'):?>
                         <li class="sidebar-item">
                             <a class="sidebar-link <?=$menu=='users'?'active':''?>" href="<?=base_url('users');?>"
                                 aria-expanded="false">
@@ -239,6 +256,7 @@
                                 <span class="hide-menu">Users</span>
                             </a>
                         </li>
+                        <?php endif;?>
                         <!-- <li class="sidebar-item">
                             <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
                                 <span>
@@ -346,21 +364,32 @@
                     <ul class="navbar-nav">
                         <li class="nav-item d-block d-xl-none">
                             <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse"
-                                href="javascript:void(0)">
+                                href="javascript:void(0)" id="drop3" data-bs-toggle="dropdown">
                                 <i class="ti ti-menu-2"></i>
                             </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                                aria-labelledby="drop3">
+                                <div class="message-body">
+                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <i class="ti ti-user fs-6"></i>
+                                        <p class="mb-0 fs-3">
+                                            <?=$this->session->userdata('name').' | '.$this->session->userdata('role');?>
+                                        </p>
+                                    </a>
+                                    <a href="<?=base_url('logout');?>"
+                                        class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-icon-hover" href="javascript:void(0)">
                                 <i class="ti ti-bell-ringing"></i>
-                                <div class="notification bg-primary rounded-circle"></div>
+                                <div class="notification bg-success rounded-circle"></div>
                             </a>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                            <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/"
-                                target="_blank" class="btn btn-primary">Download Free</a>
                             <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -373,17 +402,9 @@
                                         <a href="javascript:void(0)"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
-                                            <p class="mb-0 fs-3">My Profile</p>
-                                        </a>
-                                        <a href="javascript:void(0)"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-mail fs-6"></i>
-                                            <p class="mb-0 fs-3">My Account</p>
-                                        </a>
-                                        <a href="javascript:void(0)"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-list-check fs-6"></i>
-                                            <p class="mb-0 fs-3">My Task</p>
+                                            <p class="mb-0 fs-3">
+                                                <?=$this->session->userdata('name').' | '.$this->session->userdata('role');?>
+                                            </p>
                                         </a>
                                         <a href="<?=base_url('logout');?>"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>

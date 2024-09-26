@@ -3,10 +3,12 @@
         <div class="card w-100 p-4">
             <div class="d-flex">
                 <h5 class="card-title fw-semibold mb-4">FAKULTAS</h5>
+                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_s' && $this->session->userdata('role') != 'user'):?>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#addFakultas"
                     class="btn btn-primary ms-auto">
                     Tambah Data
                 </button>
+                <?php endif;?>
             </div>
             <div class="card-body p-4">
                 <div class="table-responsive">
@@ -22,9 +24,11 @@
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Nama Fakultas</h6>
                                 </th>
+                                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_s' && $this->session->userdata('role') != 'user'):?>
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Aksi</h6>
                                 </th>
+                                <?php endif;?>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +44,7 @@
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-1"><?=$fakultas['nama_fakultas'];?></h6>
                                 </td>
+                                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_s' && $this->session->userdata('role') != 'user'):?>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#editFakultas" data-bs-toggle="modal"
                                         data-kode_fak="<?=$fakultas['kode_fakultas'];?>"
@@ -53,6 +58,7 @@
                                         data-id="<?=$fakultas['id_fakultas'];?>">
                                         Hapus</button>
                                 </td>
+                                <?php endif;?>
                             </tr>
                             <?php endforeach;?>
                         </tbody>
@@ -67,9 +73,11 @@
         <div class="card w-100 p-4">
             <div class="d-flex">
                 <h5 class="card-title fw-semibold mb-4">PRODI</h5>
+                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_s' && $this->session->userdata('role') != 'user'):?>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#addProdi" class="btn btn-primary ms-auto">
                     Tambah Data
                 </button>
+                <?php endif;?>
             </div>
             <div class="card-body p-4">
                 <div class="table-responsive">
@@ -88,9 +96,11 @@
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Nama Fakultas</h6>
                                 </th>
+                                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_s' && $this->session->userdata('role') != 'user'):?>
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Aksi</h6>
                                 </th>
+                                <?php endif;?>
                             </tr>
                         </thead>
                         <tbody>
@@ -109,6 +119,7 @@
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-1"><?=$prodi['nama_fakultas'];?></h6>
                                 </td>
+                                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_s' && $this->session->userdata('role') != 'user'):?>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#editProdi" data-bs-toggle="modal"
                                         data-kode_prodi="<?=$prodi['kode_prodi'];?>"
@@ -122,6 +133,7 @@
                                         data-id_prodi="<?=$prodi['id_prodi'];?>">
                                         Hapus</button>
                                 </td>
+                                <?php endif;?>
                             </tr>
                             <?php endforeach;?>
                         </tbody>

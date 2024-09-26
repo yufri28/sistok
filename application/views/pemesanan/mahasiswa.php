@@ -3,7 +3,7 @@
         <div class="card w-100 p-4">
             <div class="d-flex flex-column flex-lg-row align-items-lg-center">
                 <h5 class="card-title fw-semibold mb-4">PEMESANAN STOK MAHASISWA</h5>
-                <?php if($this->session->userdata('role') == 'administrator' || $this->session->userdata('role') == 'admin'):?>
+                <?php if($this->session->userdata('role') == 'administrator' || $this->session->userdata('role') == 'admin_m' || $this->session->userdata('role') == 'admin'):?>
                 <div class="d-flex justify-content-center ms-lg-auto">
                     <button type="button" id="masuk_gudang" class="btn btn-secondary me-2">
                         Masuk Gudang
@@ -19,7 +19,7 @@
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">No</h6>
                                 </th>
-                                <?php if($this->session->userdata('role') == 'administrator' || $this->session->userdata('role') == 'admin'):?>
+                                <?php if($this->session->userdata('role') == 'administrator' || $this->session->userdata('role') == 'admin_m' || $this->session->userdata('role') == 'admin'):?>
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Pilih</h6>
                                 </th>
@@ -72,7 +72,7 @@
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0"><?=++$i?>.</h6>
                                 </td>
-                                <?php if($this->session->userdata('role') == 'administrator' || $this->session->userdata('role') == 'admin'):?>
+                                <?php if($this->session->userdata('role') == 'administrator' || $this->session->userdata('role') == 'admin_m' || $this->session->userdata('role') == 'admin'):?>
                                 <td class="border-bottom-0">
                                     <div class="form-check">
                                         <input <?=$mahasiswa['status'] == 'Selesai'?'disabled':'';?>

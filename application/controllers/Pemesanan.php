@@ -248,7 +248,7 @@ class Pemesanan extends CI_Controller {
 				$data_update_stok = [
 					'jumlah_stok' => $getRestok['jumlah_stok'] // Ini akan di-handle oleh fungsi update di model
 				];
-				$updateResult = $this->PemesananModel->update_siswa($cek_fk['id_stok_mhs'], $data_update_stok);
+				$updateResult = $this->PemesananModel->update_siswa($cek_fk['id_stok_siswa'], $data_update_stok);
 				if (!$updateResult) {
 					$errors[] = "Gagal mengupdate stok untuk ID: $restokId";
 					continue; // Lanjutkan ke transaksi berikutnya

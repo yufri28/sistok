@@ -3,10 +3,12 @@
         <div class="card w-100 p-4">
             <div class="d-flex">
                 <h5 class="card-title fw-semibold mb-4">TYPE STOK</h5>
+                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'user'):?>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#addTypestok"
                     class="btn btn-primary ms-auto">
                     Tambah Data
                 </button>
+                <?php endif;?>
             </div>
             <div class="card-body p-4">
                 <div class="table-responsive">
@@ -19,9 +21,11 @@
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Nama Stok</h6>
                                 </th>
+                                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'user'):?>
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Aksi</h6>
                                 </th>
+                                <?php endif;?>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +38,7 @@
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-1"><?=$typestok['nama_typestok'];?></h6>
                                 </td>
+                                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'user'):?>
                                 <td class="border-bottom-0">
                                     <button type="button" data-bs-target="#editTypestok" data-bs-toggle="modal"
                                         data-typestok="<?=$typestok['nama_typestok'];?>"
@@ -46,6 +51,7 @@
                                         data-id_typestok="<?=$typestok['id_typestok'];?>">
                                         Hapus</button>
                                 </td>
+                                <?php endif;?>
                             </tr>
                             <?php endforeach;?>
                         </tbody>

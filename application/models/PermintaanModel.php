@@ -13,6 +13,9 @@ class PermintaanModel extends CI_Model {
         if($role == 'admin'){    
             $this->db->where('restok_mahasiswa.status', 'PER0');
             $this->db->or_where('restok_mahasiswa.status', 'PER1');
+        }elseif($role == 'admin_m'){    
+            $this->db->where('restok_mahasiswa.status', 'PER0');
+            $this->db->or_where('restok_mahasiswa.status', 'PER1');
         }elseif($role == 'logistik'){
             $this->db->where('restok_mahasiswa.status', 'PER1');
             $this->db->or_where('restok_mahasiswa.status', 'PEM0');
@@ -83,6 +86,9 @@ class PermintaanModel extends CI_Model {
         $this->db->join('ukuran', 'ukuran.id_ukuran = restok_siswa.fk_ukuran', 'inner');
         $this->db->group_start();
         if($role == 'admin'){    
+            $this->db->where('restok_siswa.status', 'PER0');
+            $this->db->or_where('restok_siswa.status', 'PER1');
+        }elseif($role == 'admin_s'){    
             $this->db->where('restok_siswa.status', 'PER0');
             $this->db->or_where('restok_siswa.status', 'PER1');
         }elseif($role == 'logistik'){

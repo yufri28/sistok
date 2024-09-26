@@ -67,15 +67,14 @@ class PengambilanModel extends CI_Model {
     }
 
     // ========================= Siswa ==========================================
-    public function getAllSiswa($fk_unit) {
+    public function getAllSiswa() {
         $this->db->select('pengambilan_siswa.*, tahun_ajar.id_ta, typestok.nama_typestok, siswa.nis, siswa.nama_siswa, tahun_ajar.nama_ta, ukuran.nama_ukuran');
         $this->db->from('pengambilan_siswa');
         $this->db->join('siswa', 'siswa.id_siswa = pengambilan_siswa.fk_siswa', 'inner');
-        $this->db->join('stok_siswa', 'stok_siswa.id_stok_mhs = pengambilan_siswa.fk_stok', 'inner');
+        $this->db->join('stok_siswa', 'stok_siswa.id_stok_siswa = pengambilan_siswa.fk_stok', 'inner');
         $this->db->join('ukuran', 'ukuran.id_ukuran = stok_siswa.fk_ukuran', 'inner');
         $this->db->join('typestok', 'typestok.id_typestok = stok_siswa.fk_typestok', 'inner');
         $this->db->join('tahun_ajar', 'tahun_ajar.id_ta = pengambilan_siswa.fk_ta', 'inner');
-        $this->db->where('stok_siswa.fk_unit', $fk_unit);
         $query = $this->db->get();
 
         return $query->result_array();
@@ -85,7 +84,7 @@ class PengambilanModel extends CI_Model {
         $this->db->select('pengambilan_siswa.*, tahun_ajar.id_ta, typestok.nama_typestok, siswa.nis, siswa.nama_siswa, tahun_ajar.nama_ta, ukuran.nama_ukuran');
         $this->db->from('pengambilan_siswa');
         $this->db->join('siswa', 'siswa.id_siswa = pengambilan_siswa.fk_siswa', 'inner');
-        $this->db->join('stok_siswa', 'stok_siswa.id_stok_mhs = pengambilan_siswa.fk_stok', 'inner');
+        $this->db->join('stok_siswa', 'stok_siswa.id_stok_siswa = pengambilan_siswa.fk_stok', 'inner');
         $this->db->join('ukuran', 'ukuran.id_ukuran = stok_siswa.fk_ukuran', 'inner');
         $this->db->join('typestok', 'typestok.id_typestok = stok_siswa.fk_typestok', 'inner');
         $this->db->join('tahun_ajar', 'tahun_ajar.id_ta = pengambilan_siswa.fk_ta', 'inner');
@@ -96,7 +95,17 @@ class PengambilanModel extends CI_Model {
 
     public function add_siswa($data) {
        $insert = $this->db->insert('pengambilan_siswa', $data);
-        return $insert;
+    
+       if ($insert) {
+           $this->db->set('jumlah_stok', 'jumlah_stok - 1', FALSE); 
+           $this->db->where('id_stok_siswa', $data['fk_stok']);
+           $update = $this->db->update('stok_siswa');
+   
+           
+           return $update;
+       } else {
+           return false;
+       }
     }
 
     public function update_siswa($id, $data) {
@@ -104,8 +113,19 @@ class PengambilanModel extends CI_Model {
         return $this->db->update('pengambilan_siswa', $data);
     }
 
-    public function delete_siswa($id) {
+    public function delete_siswa($id, $data) {
         $this->db->where('id_pengambilan', $id);
-        return $this->db->delete('pengambilan_siswa');
+        $delete = $this->db->delete('pengambilan_siswa');
+
+        if ($delete) {
+            if($data['kembalikan_stok'] == 'ya'){
+                $this->db->set('jumlah_stok', 'jumlah_stok + 1', FALSE); 
+                $this->db->where('id_stok_siswa', $data['fk_stok']);
+                $update = $this->db->update('stok_siswa');
+            }
+            return $delete;
+        } else {
+            return false;
+        }
     }
 }

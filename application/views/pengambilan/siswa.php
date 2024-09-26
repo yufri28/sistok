@@ -2,11 +2,13 @@
     <div class="d-flex align-items-stretch">
         <div class="card w-100 p-4">
             <div class="d-flex">
-                <h5 class="card-title fw-semibold mb-4">DATA PENGAMBILAN UCB</h5>
+                <h5 class="card-title fw-semibold mb-4">DATA PENGAMBILAN SISWA</h5>
+                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_m' && $this->session->userdata('role') != 'user'):?>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#addPengambilan"
                     class="btn btn-primary ms-auto">
                     Tambah Data
                 </button>
+                <?php endif;?>
             </div>
             <div class="card-body p-4">
                 <div class="table-responsive">
@@ -20,10 +22,10 @@
                                     <h6 class="fw-semibold mb-0">ID Pengambilan</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">NIM</h6>
+                                    <h6 class="fw-semibold mb-0">NIS</h6>
                                 </th>
                                 <th class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-0">Nama Mahasiswa</h6>
+                                    <h6 class="fw-semibold mb-0">Nama Siswa</h6>
                                 </th>
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Kelas</h6>
@@ -41,9 +43,11 @@
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Tahun Ajar</h6>
                                 </th>
+                                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_m' && $this->session->userdata('role') != 'user'):?>
                                 <th class="border-bottom-0">
                                     <h6 class="fw-semibold mb-0">Aksi</h6>
                                 </th>
+                                <?php endif;?>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,13 +58,13 @@
                                     <h6 class="fw-semibold mb-0"><?=++$i;?>.</h6>
                                 </td>
                                 <td>
-                                    <h6 class="fw-semibold mb-1">IDP<?=$pengambilan['id_pengambilan'];?></h6>
+                                    <h6 class="fw-semibold mb-1">IDPS<?=$pengambilan['id_pengambilan'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1"><?=$pengambilan['nim'];?></h6>
+                                    <h6 class="fw-semibold mb-1"><?=$pengambilan['nis'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1"><?=$pengambilan['nama_mahasiswa'];?></h6>
+                                    <h6 class="fw-semibold mb-1"><?=$pengambilan['nama_siswa'];?></h6>
                                 </td>
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-1"><?=$pengambilan['kelas'];?></h6>
@@ -80,23 +84,25 @@
                                 <td class="border-bottom-0">
                                     <h6 class="fw-semibold mb-1"><?=$pengambilan['nama_ta'];?></h6>
                                 </td>
+                                <?php if($this->session->userdata('role') != 'keuangan' && $this->session->userdata('role') != 'logistik' && $this->session->userdata('role') != 'admin_m' && $this->session->userdata('role') != 'user'):?>
                                 <td class="border-bottom-0">
-                                    <button type="button" data-bs-target="#editMahasiswa" data-bs-toggle="modal"
+                                    <button type="button" data-bs-target="#editSiswa" data-bs-toggle="modal"
                                         data-fk_ta="<?=$pengambilan['fk_ta'];?>"
                                         data-semester="<?=$pengambilan['semester'];?>"
                                         data-kelas="<?=$pengambilan['kelas'];?>"
-                                        data-fk_mahasiswa="<?=$pengambilan['fk_mahasiswa'];?>"
+                                        data-fk_siswa="<?=$pengambilan['fk_siswa'];?>"
                                         data-fk_stok="<?=$pengambilan['fk_stok'];?>"
                                         data-id_pengambilan="<?=$pengambilan['id_pengambilan'];?>"
                                         class="btn btn-primary btn-sm">
                                         Edit
                                     </button>
-                                    <button type="button" data-bs-target="#hapusMahasiswa" data-bs-toggle="modal"
+                                    <button type="button" data-bs-target="#hapusSiswa" data-bs-toggle="modal"
                                         class="btn btn-danger btn-sm"
                                         data-id_pengambilan="<?=$pengambilan['id_pengambilan'];?>"
                                         data-fk_stok="<?=$pengambilan['fk_stok'];?>">
                                         Hapus</button>
                                 </td>
+                                <?php endif;?>
                             </tr>
                             <?php endforeach;?>
                         </tbody>
@@ -114,7 +120,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="<?=base_url('pengambilan/add_pengambilan_mahasiswa');?>"
+            <form class="row g-3 needs-validation" action="<?=base_url('pengambilan/add_pengambilan_siswa');?>"
                 method="post">
                 <div class="modal-body">
                     <div class="p-3">
@@ -142,12 +148,12 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="fk_mahasiswa" class="form-label">Nama</label>
-                            <select class="form-select" name="fk_mahasiswa" id="fk_mahasiswa" required>
+                            <label for="fk_siswa" class="form-label">Nama</label>
+                            <select class="form-select" data-control="select2" name="fk_siswa" id="fk_siswa" required>
                                 <option value="">Choose...</option>
-                                <?php foreach ($all_mahasiswa as $key => $mahasiswa):?>
-                                <option value="<?=$mahasiswa['id_mahasiswa'];?>">
-                                    <?=$mahasiswa['nim'].' - '.$mahasiswa['nama_mahasiswa'];?>
+                                <?php foreach ($all_siswa as $key => $siswa):?>
+                                <option value="<?=$siswa['id_siswa'];?>">
+                                    <?=$siswa['nis'].' - '.$siswa['nama_siswa'].' - '.$siswa['nama_unit'];?>
                                 </option>
                                 <?php endforeach;?>
                             </select>
@@ -166,9 +172,9 @@
                             <label for="fk_stok" class="form-label">Jenis Pengambilan</label>
                             <select class="form-select" name="fk_stok" id="fk_stok" required>
                                 <option value="">Choose...</option>
-                                <?php foreach ($getAllStokMahasiswa as $key => $stok):?>
-                                <option value="<?=$stok['id_stok_mhs'];?>">
-                                    <?= $stok['nama_typestok'].' ('.$stok['nama_prodi'].' - Ukuran '.$stok['nama_ukuran'].')';?>
+                                <?php foreach ($getAllStokSiswa as $key => $stok):?>
+                                <option value="<?=$stok['id_stok_siswa'];?>">
+                                    <?= $stok['nama_typestok'].' ('.$stok['nama_unit'].' - Ukuran '.$stok['nama_ukuran'].')';?>
                                 </option>
                                 <?php endforeach;?>
                             </select>
@@ -186,14 +192,14 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="editMahasiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editSiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3 needs-validation" action="<?=base_url('pengambilan/update_pengambilan_mahasiswa');?>"
+            <form class="row g-3 needs-validation" action="<?=base_url('pengambilan/update_pengambilan_siswa');?>"
                 method="post">
                 <div class="modal-body">
                     <div class="p-3">
@@ -221,12 +227,12 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="fk_mahasiswa" class="form-label">Nama</label>
-                            <select disabled class="form-select" name="fk_mahasiswa" id="fk_mahasiswa" required>
+                            <label for="fk_siswa" class="form-label">Nama</label>
+                            <select disabled class="form-select" name="fk_siswa" id="fk_siswa" required>
                                 <option value="">Choose...</option>
-                                <?php foreach ($all_mahasiswa as $key => $mahasiswa):?>
-                                <option value="<?=$mahasiswa['id_mahasiswa'];?>">
-                                    <?=$mahasiswa['nim'].' - '.$mahasiswa['nama_mahasiswa'];?>
+                                <?php foreach ($all_siswa as $key => $siswa):?>
+                                <option value="<?=$siswa['id_siswa'];?>">
+                                    <?=$siswa['nis'].' - '.$siswa['nama_siswa'];?>
                                 </option>
                                 <?php endforeach;?>
                             </select>
@@ -245,9 +251,9 @@
                             <label for="fk_stok" class="form-label">Jenis Pengambilan</label>
                             <select disabled class="form-select" name="fk_stok" id="fk_stok" required>
                                 <option value="">Choose...</option>
-                                <?php foreach ($getAllStokMahasiswa as $key => $stok):?>
-                                <option value="<?=$stok['id_stok_mhs'];?>">
-                                    <?= $stok['nama_typestok'].' ('.$stok['nama_prodi'].' - Ukuran '.$stok['nama_ukuran'].')';?>
+                                <?php foreach ($getAllStokSiswa as $key => $stok):?>
+                                <option value="<?=$stok['id_stok_siswa'];?>">
+                                    <?= $stok['nama_typestok'].' ('.$stok['nama_unit'].' - Ukuran '.$stok['nama_ukuran'].')';?>
                                 </option>
                                 <?php endforeach;?>
                             </select>
@@ -266,14 +272,14 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="hapusMahasiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="hapusSiswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="row g-3" action="<?=base_url('pengambilan/delete_pengambilan_mahasiswa');?>" method="post">
+            <form class="row g-3" action="<?=base_url('pengambilan/delete_pengambilan_siswa');?>" method="post">
                 <div class="modal-body">
                     <div class="p-3">
                         <div class="mb-3">
@@ -311,8 +317,8 @@
 </div>
 <script>
 // ================== Edit ========================
-const editMahasiswa = document.getElementById('editMahasiswa');
-editMahasiswa.addEventListener('show.bs.modal', function(event) {
+const editSiswa = document.getElementById('editSiswa');
+editSiswa.addEventListener('show.bs.modal', function(event) {
     // Button that triggered the modal
     const button = event.relatedTarget;
 
@@ -321,29 +327,29 @@ editMahasiswa.addEventListener('show.bs.modal', function(event) {
     const semester = button.getAttribute('data-semester');
     const kelas = button.getAttribute('data-kelas');
     const fk_stok = button.getAttribute('data-fk_stok');
-    const fk_mahasiswa = button.getAttribute('data-fk_mahasiswa');
+    const fk_siswa = button.getAttribute('data-fk_siswa');
 
     // Update the modal's content
-    const modalIdData = editMahasiswa.querySelector('#id_pengambilan');
-    const modalTa = editMahasiswa.querySelector('#fk_ta');
-    const modalSemester = editMahasiswa.querySelector('#semester');
-    const modalKelas = editMahasiswa.querySelector('#kelas');
-    const modalFkMahasiswa = editMahasiswa.querySelector('#fk_mahasiswa');
-    const modalStok = editMahasiswa.querySelector('#fk_stok');
-    const modalUkuran = editMahasiswa.querySelector('#fk_mahasiswa');
+    const modalIdData = editSiswa.querySelector('#id_pengambilan');
+    const modalTa = editSiswa.querySelector('#fk_ta');
+    const modalSemester = editSiswa.querySelector('#semester');
+    const modalKelas = editSiswa.querySelector('#kelas');
+    const modalFkSiswa = editSiswa.querySelector('#fk_siswa');
+    const modalStok = editSiswa.querySelector('#fk_stok');
+    const modalUkuran = editSiswa.querySelector('#fk_siswa');
 
     modalIdData.value = id_pengambilan;
     modalTa.value = fk_ta;
     modalSemester.value = semester;
     modalKelas.value = kelas;
-    modalFkMahasiswa.value = fk_mahasiswa;
+    modalFkSiswa.value = fk_siswa;
     modalStok.value = fk_stok;
 });
 
 
 // ============== Hapus =======================
-const hapusMahasiswa = document.getElementById('hapusMahasiswa');
-hapusMahasiswa.addEventListener('show.bs.modal', function(event) {
+const hapusSiswa = document.getElementById('hapusSiswa');
+hapusSiswa.addEventListener('show.bs.modal', function(event) {
     // Button that triggered the modal
     const button = event.relatedTarget;
 
@@ -351,9 +357,9 @@ hapusMahasiswa.addEventListener('show.bs.modal', function(event) {
     const fk_stok = button.getAttribute('data-fk_stok');
 
     // Update the modal's content
-    const modalIdData = hapusMahasiswa.querySelector('#id_pengambilan');
-    const modalTextId = hapusMahasiswa.querySelector('#text_id');
-    const modalFkStok = hapusMahasiswa.querySelector('#fk_stok');
+    const modalIdData = hapusSiswa.querySelector('#id_pengambilan');
+    const modalTextId = hapusSiswa.querySelector('#text_id');
+    const modalFkStok = hapusSiswa.querySelector('#fk_stok');
 
     modalIdData.value = id_pengambilan;
     modalFkStok.value = fk_stok;

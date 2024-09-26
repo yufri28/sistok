@@ -51,7 +51,9 @@ Swal.fire({
 <script src="<?=base_url()?>assets/libs/simplebar/dist/simplebar.js"></script>
 <!-- <script src="<?=base_url()?>assets/js/dashboard.js"></script> -->
 <script src="https://cdn.datatables.net/2.1.3/js/dataTables.min.js"></script>
-
+<!-- begin::Select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- end::Select2 -->
 </body>
 
 </html>
