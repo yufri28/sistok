@@ -388,7 +388,7 @@
                                 <i class="ti ti-bell-ringing"></i>
                                 <div class="notification bg-success rounded-circle"></div>
                             </button>
-                            <ul class="dropdown-menu" style="max-height: 300px; overflow-y: auto;">
+                            <!-- <ul class="dropdown-menu" style="max-height: 300px; overflow-y: auto;">
                                 <li><a class="dropdown-item active" href="#">5 permintaan stok baru</a></li>
                                 <li><a class="dropdown-item" href="#">1 permintaan stok baru</a></li>
                                 <li><a class="dropdown-item" href="#">3 permintaan stok baru</a></li>
@@ -400,7 +400,7 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item text-center" href="#">Lihat Semua</a></li>
-                            </ul>
+                            </ul> -->
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
