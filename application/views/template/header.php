@@ -237,7 +237,7 @@
                                 <?php endif;?>
                             </ul>
                         </li>
-                        <li class="sidebar-item">
+                        <!-- <li class="sidebar-item">
                             <a class="sidebar-link <?=$menu=='report'?'active':''?>" href="<?=base_url('report');?>"
                                 aria-expanded="false">
                                 <span>
@@ -245,7 +245,7 @@
                                 </span>
                                 <span class="hide-menu">Laporan</span>
                             </a>
-                        </li>
+                        </li> -->
                         <?php if($this->session->userdata('role') == 'administrator' || $this->session->userdata('role') == 'admin'):?>
                         <li class="sidebar-item">
                             <a class="sidebar-link <?=$menu=='users'?'active':''?>" href="<?=base_url('users');?>"
@@ -382,10 +382,25 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                            <button class="nav-link nav-icon-hover"
+                                style="background: none; color: inherit; border: none; cursor: pointer; outline: inherit;"
+                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="ti ti-bell-ringing"></i>
                                 <div class="notification bg-success rounded-circle"></div>
-                            </a>
+                            </button>
+                            <ul class="dropdown-menu" style="max-height: 300px; overflow-y: auto;">
+                                <li><a class="dropdown-item active" href="#">5 permintaan stok baru</a></li>
+                                <li><a class="dropdown-item" href="#">1 permintaan stok baru</a></li>
+                                <li><a class="dropdown-item" href="#">3 permintaan stok baru</a></li>
+                                <li><a class="dropdown-item" href="#">2 permintaan stok baru</a></li>
+                                <li><a class="dropdown-item" href="#">10 permintaan stok baru</a></li>
+                                <li><a class="dropdown-item" href="#">7 permintaan stok baru</a></li>
+                                <li><a class="dropdown-item" href="#">4 permintaan stok baru</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-center" href="#">Lihat Semua</a></li>
+                            </ul>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
