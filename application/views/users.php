@@ -152,6 +152,8 @@
                             <select class="form-select" name="role" id="role" required>
                                 <option value="">Choose...</option>
                                 <option value="admin">Admin</option>
+                                <option value="admin_s">Admin Siswa</option>
+                                <option value="admin_m">Admin Mahasiswa</option>
                                 <option value="logistik">Logistik</option>
                                 <option value="keuangan">Keuangan</option>
                                 <option value="user">User Biasa</option>
