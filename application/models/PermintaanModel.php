@@ -21,6 +21,9 @@ class PermintaanModel extends CI_Model {
             $this->db->or_where('restok_mahasiswa.status', 'PEM0');
         }elseif($role == 'keuangan'){
             $this->db->where('restok_mahasiswa.status', 'PEM0');
+        }else{
+            $this->db->where('restok_mahasiswa.status', 'PER0');
+            $this->db->or_where('restok_mahasiswa.status', 'PER1');
         }
         $this->db->group_end();
         $query = $this->db->get();
@@ -96,6 +99,9 @@ class PermintaanModel extends CI_Model {
             $this->db->or_where('restok_siswa.status', 'PEM0');
         }elseif($role == 'keuangan'){
             $this->db->where('restok_siswa.status', 'PEM0');
+        }else{
+            $this->db->where('restok_siswa.status', 'PER0');
+            $this->db->or_where('restok_siswa.status', 'PER1');
         }
         $this->db->group_end();
         $query = $this->db->get();

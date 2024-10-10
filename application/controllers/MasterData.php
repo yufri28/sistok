@@ -489,7 +489,7 @@ class MasterData extends CI_Controller {
 	{
 		$id_mahasiswa = htmlspecialchars($this->input->post('id_mahasiswa'));
 		
-		$cekMahasiswaByIdNim = $this->MahasiswaModel->getById($id_mahasiswa);
+		$cekMahasiswaByIdNim = $this->MahasiswaModel->getByIdMhs($id_mahasiswa);
 
 		if($cekMahasiswaByIdNim)
 		{

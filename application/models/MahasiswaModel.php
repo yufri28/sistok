@@ -21,6 +21,15 @@ class MahasiswaModel extends CI_Model {
         return $query->result_array();
     }
 
+    public function getByIdMhs($id) {
+        $this->db->select('mahasiswa.*, prodi.id_prodi, prodi.nama_prodi');
+        $this->db->from('mahasiswa');
+        $this->db->join('prodi', 'prodi.id_prodi = mahasiswa.fk_prodi', 'inner');
+        $this->db->where('mahasiswa.id_mahasiswa', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function getByNim($nim) {
         $this->db->where('nim', $nim);
         $query = $this->db->get('mahasiswa');
